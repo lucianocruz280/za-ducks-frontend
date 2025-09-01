@@ -66,7 +66,7 @@ GET http://localhost:3005/api/products
 ```
 ```bash
 
-GET http://localhost:3005/api/search?q=adi&skip=0&take=12
+GET http://localhost:3005/api/products/search?q=adi&skip=0&take=12
 ```
 
 ## Estructura del proyecto
