@@ -1,40 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/pages/api-reference/create-next-app).
+<div align="center">
 
-## Getting Started
+## ZA Ducks Frontend
+Frontend con Next.js 15, TailwindCSS, shadcn/ui y TypeScript. Consume el backend de ZA Ducks.
 
-First, run the development server:
+</div>
 
+📦 Instalación local (sin Docker)
+Ejecuta estos comandos en tu terminal.
 ```bash
+git clone https://github.com/tu-usuario/za-ducks-frontend.git
+cd za-ducks-frontend
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Variables de entorno
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+Crea un archivo .env.local en la raíz con este contenido.
 
-[API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+```bash
+NEXT_PUBLIC_API_URL=http://localhost:3005
+NODE_ENV=development
+NEXT_TELEMETRY_DISABLED=1
+```
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/pages/building-your-application/routing/api-routes) instead of React pages.
+## Uso con Docker (recomendado)
 
-This project uses [`next/font`](https://nextjs.org/docs/pages/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Construye y levanta el Frontend con Compose.
 
-## Learn More
+```bash
+docker compose up --build frontend
+```
 
-To learn more about Next.js, take a look at the following resources:
+## URLs de referencia:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn-pages-router) - an interactive Next.js tutorial.
+```bash
+Frontend ..... http://localhost:3000
+Backend ...... http://localhost:3005/api
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Si cambiaste .env.local, reconstruye:
 
-## Deploy on Vercel
+```bash
+docker compose down -v
+docker compose build --no-cache
+docker compose up
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Rutas principales
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/pages/building-your-application/deploying) for more details.
+Usa estas rutas para probar la interfaz.
+
+```bash
+GET /
+
+GET /search?q=adi
+```
+
+## Endpoints consumidos (API)
+
+El frontend consume estos endpoints del backend.
+
+```bash
+GET http://localhost:3005/api/products
+```
+```bash
+
+GET http://localhost:3005/api/search?q=adi&skip=0&take=12
+```
+
+## Estructura del proyecto
+
+Referencia rápida de carpetas/archivos (Pages Router).
+---
+src/
+  ├─ pages/
+  │    ├─ index.tsx
+  │    └─ search.tsx
+  ├─ components/
+  ├─ lib/
+  ├─ styles/
+  └─ public/
+---
+
+Scripts útiles
+
+Comandos de NPM más usados.
+
+```bash
+npm run dev       # desarrollo
+npm run build     # compilar
+npm run start     # producción local
+npm run lint      # lint
+npm run format    # formateo
+```
