@@ -1,18 +1,32 @@
-import { ProductItem } from "@/components/product-card";
 
-export type SearchResponse = { 
-    items: ProductItem[]; 
-    palindrome: boolean;
-    total: number 
+export type Product = {
+  id: string;
+  title: string;
+  brand: string;
+  description: string;
+  price: number;
+  currency: string;
+  originalPrice?: number;
+  discountApplied?: boolean;
+};
+
+export type SearchResult = {
+  items: Product[];
+  palindrome: boolean;
+  total: number;
 };
 
 const BASE = process.env.NEXT_PUBLIC_API_URL!;
-export async function searchProducts(q: string, skip = 0, take = 12): Promise<SearchResponse> {
-  const url = new URL("/api/search", BASE);
-  url.searchParams.set("q", q);
-  url.searchParams.set("skip", String(skip));
-  url.searchParams.set("take", String(take));
-  const res = await fetch(url.toString(), { cache: "no-store" });
-  if (!res.ok) throw new Error("Search failed");
+export async function listProducts(skip = 0, take = 12): Promise<SearchResult> {
+  const url = `${BASE}/api/products?skip=${skip}&take=${take}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`List products failed: ${res.status}`);
+  return res.json();
+}
+
+export async function searchProducts(q: string, skip = 0, take = 12): Promise<SearchResult> {
+  const url = `${BASE}/api/products/search?q=${encodeURIComponent(q)}&skip=${skip}&take=${take}`;
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) throw new Error(`Search failed: ${res.status}`);
   return res.json();
 }

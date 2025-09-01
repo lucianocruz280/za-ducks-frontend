@@ -1,22 +1,12 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Image from "next/image";
-
-export type ProductItem = {
-    id: string;
-    title: string;
-    brand: string;
-    description: string;
-    price: number;
-    currency: string;
-    originalPrice?: number;
-    discountApplied?: boolean;
-};
+import { Product } from "@/lib/api";
 
 const fmt = (cents: number, ccy = "MXN") =>
     new Intl.NumberFormat("es-MX", { style: "currency", currency: ccy, maximumFractionDigits: 0 }).format(cents / 100);
 
-export default function ProductCard({ p }: { p: ProductItem }) {
+export default function ProductCard({ p }: { p: Product }) {
     return (
         <Card className="overflow-hidden hover:shadow-lg transition">
             <div className="relative aspect-[4/3] bg-gray-100">
