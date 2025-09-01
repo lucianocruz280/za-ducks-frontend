@@ -72,7 +72,7 @@ GET http://localhost:3005/api/search?q=adi&skip=0&take=12
 ## Estructura del proyecto
 
 Referencia rápida de carpetas/archivos (Pages Router).
----
+```bash
 src/
   ├─ pages/
   │    ├─ index.tsx
@@ -81,7 +81,7 @@ src/
   ├─ lib/
   ├─ styles/
   └─ public/
----
+```
 
 Scripts útiles
 
